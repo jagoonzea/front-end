@@ -1,0 +1,81 @@
+body {
+    overflow-x: hidden;
+    background-color: rgb(214, 255, 181);
+    animation: color 20s;
+    animation-iteration-count: infinite;
+}
+figure {
+    perspective: 1500px;
+}
+
+.image {
+    background-color: rgb(37, 37, 37);
+    background-size: 36rem;
+    height: 49rem;
+    width: 35rem;
+    background-position: -.5rem -.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 6rem;
+    border-radius: 2rem;
+    animation-fill-mode: forwards;
+    animation-name: anim;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+    box-shadow: 1rem 1rem 50rem rgba(0, 0, 0, 0.1);
+    border: .1rem solid rgb(185, 185, 185);
+}
+
+.image:hover {
+    cursor: pointer;
+}
+header{
+    background-color: rgb(255, 255, 255);
+    width: 16rem;
+    padding: 2rem;
+    margin-top: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 2rem;
+    box-shadow: 0rem 0rem 1rem rgba(0, 0, 0, 0.1);
+}
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    color: black;
+}
+button {
+    background-color: white;
+    border-radius: 2rem;
+    border: none;
+    font-weight: 600;
+    padding: 2rem;
+    font-size: 2rem;
+    margin-top: 10rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0rem 0rem 1rem rgba(0, 0, 0, 0.1);
+}
+button:hover {
+    cursor: pointer;
+    animation: but 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes anim{
+    25% {transform: rotateX(0deg) rotateY(10deg) rotateZ(1deg);}
+    50% {transform: rotate(0);}
+    75% {transform: rotateX(-0deg) rotateY(-10deg) rotateZ(-1deg);}
+}
+@keyframes but{
+    25% {transform: rotateX(5deg) rotateY(5deg) rotateZ(5deg) scale(110%);}
+    50% {transform: rotate(0);}
+    75% {transform: rotateX(-5deg) rotateY(-5deg) rotateZ(-5deg) scale(110%);}
+}
+@keyframes color{
+    50% { background-color: rgb(255, 214, 127);}
+}

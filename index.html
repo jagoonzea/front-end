@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <title>3D demo</title>
+</head>
+<body>
+    <header>
+        <h1>CARDS LEFT:</h1>
+    </header>
+    <figure>
+        <div class="image"></div>
+        <button>RESET DECK</button>
+    </figure>
+    <script>
+        $(document).ready(function(){
+            let request = new XMLHttpRequest();
+            let response = "NO_RESPONSE"
+            let deckID
+            let delay = 500
+            function resetDeck(){
+                request.open('GET', 'https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
+                request.send();
+                request.onload = ()=>{
+                    response= JSON.parse(request.response)
+                    deckID = response.deck_id
+                }
+            }
+            function drawCard(){
+                request.open('GET', `https://www.deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`)
+                request.send();
+                request.onload = ()=>{
+                    response= JSON.parse(request.response)
+                    return response.cards[0].image
+                }
+            }
+            resetDeck()
+            $("button").click(function(){
+                resetDeck()
+                $("h1").html(`CARDS LEFT:`)
+                $("div").css("background-image", "none")
+            })
+            $(".image").click(function(){
+                let card = `url(${drawCard()})`
+                
+                setTimeout(function(){
+                    card = `url(${response.cards[0].image})`
+                    $("div").css("background-image", card)
+                    $("h1").html(`CARDS LEFT: ${response.remaining}`)
+                    console.log(response.remaining)
+                }, delay)
+            })
+            //animation-name: flip;
+            //animation-duration: 1s;
+            //animation-fill-mode: forwards;
+        })
+    </script>
+</body>
+</html>
